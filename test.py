@@ -1,10 +1,20 @@
-from sys import argv
+import sys
+import getopt
 
-f1 = open(argv[1])
-f2 = open(argv[2])
-f3 = open(argv[3],'w')
+def full_name():
+    first_name = None
+    last_name = None
+    argv = sys.argv[1:]
 
-for x in f1:
-    f3.write(x)
-for y in f2:
-    f3.write(y)
+    try:
+        opts,args = getopt.getopt(argv,'f:l:',["first=","last="])
+    except:
+        print("Error")
+
+    for opt,arg in opts:
+        if opt in ['-f','--first']:
+            first_name = arg
+        elif opt in ['-l','--last']:
+            last_name = arg
+            print(first_name+" "+last_name)
+full_name()
